@@ -1,0 +1,36 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font-family-sans;
+}
+
+h1 {
+  font-size: 1.7rem;
+  color: $color-secondary;
+  margin: 0 0.5rem 1rem 0.5rem;
+  text-align: center;
+}
+
+h2 {
+  color: $color-meta;
+  font-size: 1.3rem;
+  margin: 0 0 1.5rem 0;
+}
+
+h3 {
+  display: block;
+  text-align: center;
+}
+
+h4 {
+  color: $color-meta;
+  font-size: 1.1rem;
+}
+
+h5 {
+  color: $color-accent;
+  text-transform: uppercase;
+}

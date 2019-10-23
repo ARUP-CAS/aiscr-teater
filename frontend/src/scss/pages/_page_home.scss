@@ -1,0 +1,83 @@
+@import '~scss/mixins'; // functions and mixins
+@import '~scss/variables'; // variables
+
+.large-header {
+  width: 100%;
+  background: {
+    image: $header-image;
+    repeat: no-repeat;
+    size: cover;
+  }
+  text-align: left;
+  position: relative;
+
+  .page & {
+    flex: 0 0 350px;
+  }
+
+  .large-search {
+    position: absolute;
+    bottom: -47px;
+    right: 0;
+    left: 0;
+  }
+
+  .logo {
+    padding-top: 2.3rem;
+  }
+
+  .search-content {
+    @include box-shadow;
+    border-radius: $border-radius;
+    padding: 1.5rem;
+    margin: 0 auto;
+    width: $lg-content-width;
+    text-align: center;
+    background: {
+      image: $color-caution;
+    }
+
+    @include mobile {
+      width: 100%;
+      padding: 1rem 0.5rem;
+    }
+
+    @include tablet {
+      width: 100%;
+    }
+  }
+
+  .hint {
+    position: absolute;
+    right: 13px;
+    top: 31px;
+
+    a {
+      color: $color-secondary;
+    }
+  }
+}
+
+.content-home {
+  margin-top: 5rem;
+
+  .description {
+    margin: 0 0 15px 0;
+    text-align: justify;
+    height: auto;
+  }
+
+  @include pc {
+    .oops-wrapper {
+      margin-top: 65px;
+    }
+  }
+
+  @include mobile {
+    .oops-wrapper {
+      .oops {
+        bottom: -29px;
+      }
+    }
+  }
+}

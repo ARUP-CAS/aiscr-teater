@@ -1,0 +1,17 @@
+.logo {
+  @include link-no-effect;
+  color: $color-secondary;
+  display: flex;
+  align-items: center;
+  font-size: 0.8rem;
+  padding: 1rem;
+
+  &:focus {
+    color: darken($color-secondary, 8%);
+  }
+
+  .logo-image {
+    width: 12rem;
+  }
+}
+

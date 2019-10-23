@@ -1,0 +1,18 @@
+@import '~scss/variables'; // variables
+
+.footer {
+  flex: 0 0 60px !important;
+  display: flex;
+  background-color: $footer-color;
+  align-items: center;
+  font-size: 0.7rem;
+
+  .footer-column {
+    flex: 1;
+    padding: 0 0.63rem;
+
+    &:first-child {
+      flex: 1.3;
+    }
+  }
+}

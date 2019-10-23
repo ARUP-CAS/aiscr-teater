@@ -1,0 +1,18 @@
+@import '~scss/mixins'; // functions and mixins
+
+.partners {
+  display: flex;
+  margin-top: 3rem;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+
+  .partner {
+    @include link-no-effect;
+    padding: 1rem;
+
+    img {
+      max-width: 6rem;
+    }
+  }
+}

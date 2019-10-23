@@ -1,0 +1,35 @@
+@mixin box-shadow {
+  box-shadow: 10px 10px 17px -11px rgba(119, 119, 119, 0.75);
+}
+
+@mixin mobile {
+  @media all and (max-width: #{$width-sm}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media all and (min-width: #{$width-sm + 1}) and (max-width: #{$width-lg}) {
+    @content;
+  }
+}
+
+@mixin pc {
+  @media all and (min-width: #{$width-lg + 1}) {
+    @content;
+  }
+}
+
+@mixin link-active {
+  &:before {
+    visibility: visible;
+    transform: scaleX(1);
+  }
+}
+
+@mixin link-no-effect {
+  &:focus:before,
+  &:hover:before {
+    visibility: hidden;
+  }
+}

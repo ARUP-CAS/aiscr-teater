@@ -1,0 +1,34 @@
+//
+//	VARIABLES
+// ------------------------------------------------------
+$font-size-base: 100%;
+$font-family-sans: 'Proxima Nova', sans-serif;
+$font-family-serif: 'Museo', serif;
+
+$color-primary: #7c8f9a;
+$color-secondary: #ffffff;
+$color-caution: linear-gradient(to right, rgb(243, 147, 37), rgb(230, 51, 42));
+$color-tertiary: rgb(189, 189, 189);
+$color-meta: #f39325;
+$color-error: rgb(230, 51, 42);
+$color-accent: #000000;
+
+$color-bg-body: #fff;
+$selection-color: rgba(lighten($color-meta, 10%), 0.3);
+$footer-color: #f4f4f4;
+$border-radius: 3px;
+
+$header-shadow: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
+$header-image: $header-shadow, url('~assets/background-header.jpg');
+
+$debug: false;
+$animation-speed: 0.2s;
+
+$fluid-page-padding: 0.8rem 1.5rem;
+
+$lg-content-width: 800px;
+$sm-content-width: 300px;
+$md-content-width: 600px;
+
+$width-sm: 400px;
+$width-lg: 1023px;

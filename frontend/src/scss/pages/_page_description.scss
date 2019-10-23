@@ -1,0 +1,104 @@
+@import '~scss/mixins'; // functions and mixins
+@import '~scss/variables'; // variables
+
+.breadcrumbs {
+  display: flex;
+  flex: 0 0 37px;
+  justify-content: space-between;
+  padding: $fluid-page-padding;
+  border-bottom: 1px solid $color-tertiary;
+  font-size: 0.87rem;
+
+  .breadcrumbs-list {
+    list-style-type: none;
+
+    li {
+      display: inline;
+      color: $color-accent;
+
+      &:not(:last-child):after {
+        padding: 0 8px;
+        content: '/\00a0';
+        color: $color-tertiary;
+      }
+
+      @include mobile {
+        display: block;
+        font-size: 0.8rem;
+        padding-bottom: 5px;
+
+        &:after {
+          display: none;
+        }
+      }
+    }
+
+    .active {
+      font-weight: bold;
+    }
+
+    a {
+      color: $color-accent;
+
+      &:hover,
+      &:focus {
+        text-decoration: underline;
+      }
+
+      @include link-no-effect;
+    }
+  }
+
+  .remove-search {
+    @include link-no-effect;
+    color: #000000;
+    font-weight: bold;
+
+    @include mobile {
+      display: none;
+    }
+  }
+}
+
+.description {
+  display: flex;
+  align-items: strecth;
+  height: 100%;
+  flex: 1;
+
+  @include mobile {
+    flex-direction: column;
+  }
+
+  & > * {
+    padding: $fluid-page-padding;
+  }
+
+  .empty {
+    font-style: italic;
+  }
+
+  .description-content {
+    flex: 4;
+
+    // set up for loading
+    & > div {
+      min-height: 25px;
+
+      &:first-child {
+        margin-bottom: 2rem;
+      }
+      &:not(:first-child) {
+        margin-bottom: 0.3rem;
+      }
+    }
+  }
+}
+
+.content-description-page {
+  .oops-wrapper {
+    @include mobile {
+      margin-top: 5rem;
+    }
+  }
+}
