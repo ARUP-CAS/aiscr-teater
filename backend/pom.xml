@@ -14,7 +14,7 @@
     <name>thesaurus</name>
 
     <properties>
-        <elasticsearch.version>6.8.2</elasticsearch.version>
+        <elasticsearch.version>6.8.15</elasticsearch.version>
     </properties>
 
     <dependencies>
