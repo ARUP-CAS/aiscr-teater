@@ -1,45 +1,48 @@
-import React, { FC } from 'react'
-import { SearchResultsProps } from './_types'
-import Column from 'components/column'
+import { FC } from 'react';
 
-function Loading(): JSX.Element {
-  return (
-    <>
-      <div className="column-wrapper">
-        <Column loading />
-      </div>
-      <div className="column-wrapper">
-        <Column loading />
-      </div>
-    </>
-  )
-}
+import Column from 'components/column';
+import useTranslation from 'hooks/useTranslation';
+
+import { SearchResultsProps } from './_types';
+
+const Loading = () => (
+	<>
+		<div className="column-wrapper">
+			<Column loading />
+		</div>
+		<div className="column-wrapper">
+			<Column loading />
+		</div>
+	</>
+);
 
 export const SearchResults: FC<SearchResultsProps> = ({ columns, loading }) => {
-  if (loading) {
-    return (
-      <div className="search-results">
-        <Loading />
-      </div>
-    )
-  }
+	const t = useTranslation({
+		empty: {
+			cs: 'Žádné výsledky nebyly nalezeny',
+			en: 'No results were found',
+			de: 'Keine Ergebnisse werden aufgefunden',
+		},
+	});
+	if (loading) {
+		return (
+			<div className="search-results">
+				<Loading />
+			</div>
+		);
+	}
 
-  if (!columns.length) {
-    return (
-      <div className="search-results empty-results">
-        Žádné vyhovující výsledky
-      </div>
-    )
-  }
+	if (!columns.length) {
+		return <div className="search-results empty-results">{t.empty}</div>;
+	}
 
-  return (
-    <div className="search-results">
-      {columns.map(column => (
-        <div className="column-wrapper" key={column.key}>
-          <h5>{column.title}</h5>
-          <Column data={column.data} />
-        </div>
-      ))}
-    </div>
-  )
-}
+	return (
+		<div className="search-results">
+			{columns.map(column => (
+				<div className="column-wrapper" key={column.key}>
+					<Column title={column.title} data={column.data} noResults={t.empty} />
+				</div>
+			))}
+		</div>
+	);
+};

@@ -9,58 +9,58 @@
  */
 
 @keyframes slider-animation {
-  0% {
-    opacity: 0;
-    animation-timing-function: ease-in;
-  }
-  7.5% {
-    opacity: 1;
-    transform: scale(1.05);
-    animation-timing-function: ease-out;
-  }
-  15% {
-    opacity: 1;
-  }
-  20% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0;
-  }
+	0% {
+		opacity: 0;
+		animation-timing-function: ease-in;
+	}
+	7.5% {
+		opacity: 1;
+		transform: scale(1.05);
+		animation-timing-function: ease-out;
+	}
+	15% {
+		opacity: 1;
+	}
+	20% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 0;
+	}
 }
 
 .slider {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  left: 0;
-  top: 0;
-  overflow: hidden;
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	left: 0;
+	top: 0;
+	overflow: hidden;
 
-  &:after {
-    content: '';
-    position: absolute;
-    background: $header-shadow;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-  }
+	&:after {
+		content: '';
+		position: absolute;
+		background: $header-shadow;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+	}
 
-  .slide {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    color: transparent;
-    background: {
-      position: 50% 50%;
-      size: cover;
-      repeat: no-repeat;
-    }
-    opacity: 0;
-    z-index: 0;
-    animation: slider-animation ease-in-out infinite;
-  }
+	.slide {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		color: transparent;
+		background: {
+			position: 50% 50%;
+			size: cover;
+			repeat: no-repeat;
+		}
+		opacity: 0;
+		z-index: 0;
+		animation: slider-animation ease-in-out infinite;
+	}
 }

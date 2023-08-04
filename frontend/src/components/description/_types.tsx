@@ -1,8 +1,11 @@
-import { ColumnItem } from 'components/column/_types'
+import { ColumnItem } from 'components/column/_types';
+import { GetDescriptionPage } from 'generated/GetDescriptionPage';
 
-export interface DescriptionData {
-  columns?: { data: ColumnItem[]; key: string }[]
-  title?: string
-  description?: string
-  loading?: boolean
-}
+export type DescriptionData = {
+	id?: string;
+	neighborsCol: ColumnItem[];
+	childrenCol: ColumnItem[];
+	title?: string;
+	descriptions?: GetDescriptionPage['singleCategoryWithUrl']['descriptions'];
+	loading?: boolean;
+};

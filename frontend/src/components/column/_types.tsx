@@ -1,7 +1,6 @@
-export interface ColumnItem {
-  name: string
-  url: string
-  active?: boolean
-  color?: string
-  isLeaf?: boolean
-}
+export type ColumnItem = {
+	name: string;
+	url: string;
+	active?: boolean;
+	leaf?: boolean;
+};

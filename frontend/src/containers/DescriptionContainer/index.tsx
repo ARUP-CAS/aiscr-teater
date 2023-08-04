@@ -1,3 +1,3 @@
-import { DescriptionContainer } from './DescriptionContainer'
+import { DescriptionContainer } from './DescriptionContainer';
 
-export default DescriptionContainer
+export default DescriptionContainer;

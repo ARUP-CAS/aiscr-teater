@@ -1,25 +1,30 @@
-import { SearchType } from '../generated/globalTypes'
+import { SearchType } from '../generated/globalTypes';
 
-export function getSearchTypeToString(type: SearchType): string {
-  switch (type) {
-    case SearchType.METADATA:
-      return 'metadata'
-    case SearchType.NAME:
-      return 'category'
-    default:
-      return 'uknown'
-  }
-}
+export const getSearchTypeToString = (type: SearchType) => {
+	switch (type) {
+		case SearchType.METADATA:
+			return 'metadata';
+		case SearchType.NAME:
+			return 'category';
+		default:
+			return 'unknown';
+	}
+};
 
-export function getTranslatedSearchType(type: SearchType): string {
-  const typeString = getSearchTypeToString(type)
-
-  switch (typeString) {
-    case 'category':
-      return 'Kategorie'
-    case 'metadata':
-      return 'Metadata'
-    default:
-      return 'Neznáme'
-  }
-}
+export const searchTypeTranslations = {
+	category: {
+		cs: 'Kategorie',
+		en: 'Category',
+		de: 'Kategorie',
+	},
+	metadata: {
+		cs: 'Metadata',
+		en: 'Metadata',
+		de: 'Metadaten',
+	},
+	unknown: {
+		cs: 'Neznáme',
+		en: 'Unknown',
+		de: 'Unbekannt',
+	},
+};

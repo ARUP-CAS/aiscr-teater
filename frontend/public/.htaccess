@@ -9,4 +9,7 @@ RewriteCond %{REQUEST_URI} !.*\.css$ [NC]
 RewriteCond %{REQUEST_URI} !.*\.gif$ [NC]
 RewriteCond %{REQUEST_URI} !.*\.otf$ [NC]
 RewriteCond %{REQUEST_URI} !.*\.js$ [NC]
+RewriteCond %{REQUEST_URI} !.*\.ico$ [NC]
+RewriteCond %{REQUEST_URI} !.*\.md$ [NC]
+RewriteCond %{REQUEST_URI} !.*\.json$ [NC]
 RewriteRule .* /index.html

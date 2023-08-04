@@ -1,41 +1,58 @@
-import { SearchResult } from './_types'
-import { SearchResultsColumn } from '../../components/searchResults/_types'
+import useTranslation from 'hooks/useTranslation';
+
+import { SearchResultsColumn } from '../../components/searchResults/_types';
 import {
-  getSearchTypeToString,
-  getTranslatedSearchType
-} from '../../utils/utilizeSearchTypes'
-import { SearchType } from '../../generated/globalTypes'
+	getSearchTypeToString,
+	searchTypeTranslations,
+} from '../../utils/utilizeSearchTypes';
+import { SearchType } from '../../generated/globalTypes';
 
-export function convertSearchResultsToColumns(
-  data: SearchResult[]
-): SearchResultsColumn[] {
-  const initData = [
-    {
-      data: [],
-      title: 'Výsledky v názvech hesel',
-      key: getSearchTypeToString(SearchType.NAME)
-    },
-    {
-      data: [],
-      title: 'Výsledky v metadatech',
-      key: getSearchTypeToString(SearchType.METADATA)
-    }
-  ]
+import { SearchResult } from './_types';
 
-  return data.reduce<SearchResultsColumn[]>((columns, current) => {
-    const searchType = getSearchTypeToString(current.searchType)
-    const keyInColumns = columns.find(value => value.key === searchType)
+export const convertSearchResultsToColumns = (
+	data: SearchResult[],
+): SearchResultsColumn[] => {
+	const t = useTranslation({
+		keysTitle: {
+			cs: 'Výsledky v názvech hesel',
+			en: 'Results in key names',
+			de: 'Ergebnisse im Stichwörterverzeichnis',
+		},
+		metaTitle: {
+			cs: 'Výsledky v metadatech',
+			en: 'Results in metadata',
+			de: 'Ergebnisse in Metadaten',
+		},
+		...searchTypeTranslations,
+	});
 
-    if (keyInColumns) {
-      keyInColumns.data.push(current)
-    } else {
-      columns.push({
-        data: [current],
-        title: getTranslatedSearchType(current.searchType),
-        key: searchType
-      })
-    }
+	const initData = [
+		{
+			data: [],
+			title: t.keysTitle,
+			key: getSearchTypeToString(SearchType.NAME),
+		},
+		{
+			data: [],
+			title: t.metaTitle,
+			key: getSearchTypeToString(SearchType.METADATA),
+		},
+	];
 
-    return columns
-  }, initData)
-}
+	return data.reduce<SearchResultsColumn[]>((columns, current) => {
+		const searchType = getSearchTypeToString(current.searchType);
+		const keyInColumns = columns.find(value => value.key === searchType);
+
+		if (keyInColumns) {
+			keyInColumns.data.push(current);
+		} else {
+			columns.push({
+				data: [current],
+				title: t[getSearchTypeToString(current.searchType)],
+				key: searchType,
+			});
+		}
+
+		return columns;
+	}, initData);
+};

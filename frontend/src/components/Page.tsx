@@ -1,13 +1,14 @@
-import React, { FC } from 'react'
-import classNames from 'classnames'
-import { Footer } from './Footer'
+import { FC } from 'react';
+import classNames from 'classnames';
+
+import { Footer } from './Footer';
 
 export const Page: FC<{ className?: string }> = ({
-  children,
-  className = ''
+	children,
+	className = '',
 }) => (
-  <div className={classNames('page', className)}>
-    {children}
-    <Footer />
-  </div>
-)
+	<div className={classNames('page', className)}>
+		{children}
+		<Footer />
+	</div>
+);

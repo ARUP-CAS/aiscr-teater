@@ -1,0 +1,5 @@
+type Source {
+    id: ID!
+    label: String
+    url: String
+}

@@ -1,125 +1,75 @@
-import React, { FC, useState, useEffect, useRef } from 'react'
-import { useQuery } from 'react-apollo-hooks'
-import { ApolloError } from 'apollo-client'
-import Breadcrumbs from 'components/breadcrumbs'
-import Description from 'components/description'
-import { GetDescriptionPage } from 'generated/GetDescriptionPage'
-import { GET_DESCRIPTION_PAGE } from './_gql'
+import { FC, useEffect, useRef, useMemo } from 'react';
+import { useQuery } from 'react-apollo-hooks';
+
+import Breadcrumbs from 'components/breadcrumbs';
+import Description from 'components/description';
 import {
-  parseBreadcrumbsData,
-  parseNeighborsData,
-  parseChilrenData,
-  parseParentsData
-} from './_actions'
-import { Ooops404 } from '../../components/Ooops'
-import { ColumnItem } from '../../components/column/_types'
-import { HeaderTags } from 'components/header'
-import { isOutOfViewport } from 'utils/isOutOfViewport'
+	GetDescriptionPage,
+	GetDescriptionPageVariables,
+} from 'generated/GetDescriptionPage';
+import { HeaderTags } from 'components/header';
+import { isOutOfViewport } from 'utils/isOutOfViewport';
+import useTranslation from 'hooks/useTranslation';
 
-function useDescriptionPageData(
-  isLoading: boolean,
-  data?: GetDescriptionPage,
-  error?: ApolloError
-): {
-  neighbors: ColumnItem[]
-  breadcrumbs: ColumnItem[]
-  children: ColumnItem[]
-} {
-  const [breadcrumbs, setBreadcrumbs] = useState(
-    error ? [] : parseBreadcrumbsData(data)
-  )
-  const [recommendedChildren, setChildren] = useState(
-    error ? [] : parseChilrenData(data)
-  )
-  const [recommendedNeighbors, setNeighbors] = useState(
-    error ? [] : parseNeighborsData(data)
-  )
+import { Ooops404 } from '../../components/Ooops';
 
-  useEffect(
-    () => {
-      if (isLoading || error) {
-        return
-      }
+import { parseBreadcrumbsData, parseData } from './_actions';
+import { GET_DESCRIPTION_PAGE } from './_gql';
 
-      setBreadcrumbs(parseBreadcrumbsData(data))
+export const DescriptionContainer: FC<GetDescriptionPageVariables> =
+	variables => {
+		// TODO: Fix caching bug
+		const { data, loading, error } = useQuery<
+			GetDescriptionPage,
+			GetDescriptionPageVariables
+		>(GET_DESCRIPTION_PAGE, { variables, fetchPolicy: 'no-cache' });
 
-      const neighbors = parseNeighborsData(data)
-      const children = parseChilrenData(data)
-      const parents = parseParentsData(data)
+		const { breadcrumbs, neighbors, children } = useMemo(
+			() =>
+				error || loading
+					? { breadcrumbs: [], neighbors: [], children: [] }
+					: {
+							breadcrumbs: parseBreadcrumbsData(data),
+							neighbors: parseData('neighbors', data),
+							children: parseData('children', data),
+					  },
+			[loading, error, data],
+		);
 
-      // when is node leaf, try to display 2 columns
-      if (!children.length && parents.length) {
-        setNeighbors(parents)
-        setChildren(neighbors)
-      } else {
-        setNeighbors(neighbors)
-        setChildren(children)
-      }
-    },
-    [isLoading, error, data]
-  )
+		const titleRef = useRef<HTMLHeadingElement>(null);
+		const t = useTranslation({
+			loading: { cs: 'Načíta se', en: 'Loading', de: 'Laden' },
+		});
 
-  return {
-    neighbors: recommendedNeighbors,
-    breadcrumbs,
-    children: recommendedChildren
-  }
-}
+		useEffect(() => {
+			if (
+				!loading &&
+				titleRef.current &&
+				isOutOfViewport(titleRef.current).any
+			) {
+				titleRef.current.scrollIntoView();
+			}
+		}, [loading, data]);
 
-export const DescriptionContainer: FC<{ pageUrl: string }> = ({ pageUrl }) => {
-  const { data, loading, error } = useQuery<GetDescriptionPage>(
-    GET_DESCRIPTION_PAGE,
-    {
-      variables: { url: pageUrl }
-    }
-  )
-  const { breadcrumbs, neighbors, children } = useDescriptionPageData(
-    loading,
-    data,
-    error
-  )
+		if (error) {
+			return <Ooops404 />;
+		}
 
-  const titleRef = useRef<HTMLHeadingElement>(null)
-
-  useEffect(
-    () => {
-      if (
-        !loading &&
-        titleRef.current &&
-        isOutOfViewport(titleRef.current).any
-      ) {
-        titleRef.current.scrollIntoView()
-      }
-    },
-    [loading, data]
-  )
-
-  if (error) {
-    return <Ooops404 />
-  }
-
-  return (
-    <>
-      <HeaderTags
-        title={data ? data.singleCategoryWithUrl.name : 'Načíta se'}
-      />
-      <Breadcrumbs data={breadcrumbs} />
-      <Description
-        ref={titleRef}
-        columns={[
-          {
-            key: 'neighbors-column',
-            data: neighbors
-          },
-          {
-            key: 'children-column',
-            data: children
-          }
-        ]}
-        loading={loading}
-        title={data ? data.singleCategoryWithUrl.name : ''}
-        description={data ? data.singleCategoryWithUrl.description : ''}
-      />
-    </>
-  )
-}
+		return (
+			<>
+				<HeaderTags
+					title={data ? data.singleCategoryWithUrl.name : t.loading}
+				/>
+				<Breadcrumbs data={breadcrumbs} />
+				<Description
+					id={data?.singleCategoryWithUrl.id}
+					ref={titleRef}
+					neighborsCol={neighbors}
+					childrenCol={children}
+					loading={loading}
+					title={data?.singleCategoryWithUrl.name}
+					descriptions={data?.singleCategoryWithUrl.descriptions}
+				/>
+			</>
+		);
+	};

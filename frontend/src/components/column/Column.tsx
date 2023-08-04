@@ -1,61 +1,56 @@
-import React, { FC } from 'react'
-import { Link } from 'react-router-dom'
-import classNames from 'classnames'
-import times from 'lodash/times'
-import Color from 'color'
-import { URL_DESCRIPTION } from 'constants/URL'
-import { createURL } from 'utils/createURL'
-import { ColumnItem } from './_types'
+import { FC } from 'react';
+import { Link } from 'react-router-dom';
+import classNames from 'classnames';
+import times from 'lodash/times';
 
-const ColumnResult: FC<ColumnItem> = ({ name, url, active, color, isLeaf }) => {
-  const finalColor =
-    color &&
-    Color(color)
-      .alpha(0.4)
-      .lighten(0.3)
+import useLocalizedUrl from 'hooks/useLocalizedUrl';
 
-  return (
-    <li>
-      <Link
-        to={createURL(URL_DESCRIPTION, url)}
-        title={name}
-        className={classNames({ active, colorized: !!finalColor, leaf: isLeaf })}
-        style={{
-          ...(finalColor && {
-            backgroundImage: `linear-gradient(120deg, ${finalColor.string(
-              3
-            )} 0%, ${finalColor.lighten(0.5).string(3)} 100%)`
-          })
-        }}
-      >
-        {name}
-      </Link>
-    </li>
-  )
-}
+import { ColumnItem } from './_types';
 
-function ColumnsLoading(): JSX.Element {
-  return (
-    <>
-      {times(
-        7,
-        (index): JSX.Element => {
-          return <li key={index} className="loading-background" />
-        }
-      )}
-    </>
-  )
-}
+const ColumnResult: FC<ColumnItem> = ({ name, url, active, leaf }) => {
+	const getUrl = useLocalizedUrl();
 
-export const Column: FC<{ data?: ColumnItem[]; loading?: boolean }> = ({
-  data = [],
-  loading
-}) => (
-  <ul className="column">
-    {loading ? (
-      <ColumnsLoading />
-    ) : (
-      data.map(item => <ColumnResult key={item.url} {...item} />)
-    )}
-  </ul>
-)
+	return (
+		<li>
+			<Link
+				to={getUrl(url)}
+				title={name}
+				className={classNames({
+					active,
+					leaf,
+				})}
+			>
+				{name}
+			</Link>
+		</li>
+	);
+};
+
+const ColumnsLoading = (): JSX.Element => (
+	<>
+		{times(
+			7,
+			(index): JSX.Element => (
+				<li key={index} className="loading-background" />
+			),
+		)}
+	</>
+);
+
+export const Column: FC<{
+	title?: string;
+	data?: ColumnItem[];
+	noResults?: string;
+	loading?: boolean;
+}> = ({ title, data = [], noResults, loading }) => (
+	<ul className="column">
+		{title && <h4>{title}</h4>}
+		{loading ? (
+			<ColumnsLoading />
+		) : data.length === 0 && noResults ? (
+			<p>{noResults}</p>
+		) : (
+			data.map(item => <ColumnResult key={item.url} {...item} />)
+		)}
+	</ul>
+);

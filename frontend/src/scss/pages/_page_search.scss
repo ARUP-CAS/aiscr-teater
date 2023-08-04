@@ -2,49 +2,53 @@
 @import '~scss/mixins'; // functions and mixins
 
 .content-search {
-  margin-top: 1rem;
-  display: flex;
-  flex-direction: column;
+	margin-top: 1rem;
+	display: flex;
+	flex-direction: column;
 
-  h3 {
-    flex: 0;
-  }
+	h3 {
+		flex: 0;
+	}
 
-  & > * {
-    padding-bottom: 1.6rem;
-  }
+	& > * {
+		padding-bottom: 1.6rem;
+	}
 }
 
 .search-results {
-  flex: 3;
-  display: flex;
-  align-items: stretch;
-  justify-content: center;
+	flex: 3;
+	display: flex;
+	align-items: stretch;
+	justify-content: center;
 
-  &.empty-results {
-    font-style: italic;
-    align-items: center;
-  }
+	&.empty-results {
+		font-style: italic;
+		align-items: center;
+	}
 
-  @include mobile {
-    flex-direction: column;
+	@include mobile {
+		flex-direction: column;
 
-    .column-wrapper {
-      border-right: 0 !important;
-    }
-  }
+		.column-wrapper {
+			border-right: 0 !important;
+		}
+	}
 
-  .column-wrapper {
-    padding: 0 2.5rem;
-    flex: 1;
-    border-right: 1px solid $color-tertiary;
+	.column-wrapper {
+		padding: 0 2.5rem;
+		flex: 1;
+		border-right: 1px solid $color-tertiary;
 
-    &:last-child {
-      border: 0;
-    }
-  }
+		h4 {
+			margin: 18px 0;
+		}
 
-  .column {
-    border: 0;
-  }
+		&:last-child {
+			border: 0;
+		}
+	}
+
+	.column {
+		border: 0;
+	}
 }

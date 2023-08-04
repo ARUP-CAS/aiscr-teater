@@ -1,1 +1,1 @@
-export { LargeHeaderContainer } from './LargeHeaderContainer'
+export { LargeHeaderContainer } from './LargeHeaderContainer';

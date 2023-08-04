@@ -1,37 +1,37 @@
 %content {
-  text-align: left;
+	text-align: left;
 
-  @include mobile {
-    width: 100% !important;
-    padding: 0 1rem 1rem 1rem;
-  }
+	@include mobile {
+		width: 100% !important;
+		padding: 0 1rem 1rem 1rem;
+	}
 
-  @include tablet {
-    width: 100% !important;
-    padding: 0 1rem 1rem 1rem;
-  }
+	@include tablet {
+		width: 100% !important;
+		padding: 0 1rem 1rem 1rem;
+	}
 
-  .page & {
-    flex: 3;
-  }
+	.page & {
+		flex: 3;
+	}
 }
 
 .content {
-  @extend %content;
-  margin: 0 auto;
-  width: $lg-content-width;
-  padding-bottom: 1.5rem;
+	@extend %content;
+	margin: 0 auto;
+	width: $lg-content-width;
+	padding-bottom: 1.5rem;
 }
 
 .content-fluid {
-  @extend %content;
-  width: 100%;
-  display: flex;
-  flex-flow: row wrap;
-  flex-direction: column;
+	@extend %content;
+	width: 100%;
+	display: flex;
+	flex-flow: row wrap;
+	flex-direction: column;
 
-  & > * {
-    flex: 1 100%;
-    width: 100%;
-  }
+	& > * {
+		flex: 1 100%;
+		width: 100%;
+	}
 }

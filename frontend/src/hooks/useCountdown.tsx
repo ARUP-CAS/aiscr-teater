@@ -1,39 +1,39 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback } from 'react';
 
-export function useCountdown(
+export const useCountdown =(
   timeout: number,
-  initData: boolean = false
+  initData = false
 ): {
   isCountdownActivate: boolean
   activate: () => void
   deactivate: () => void
-} {
-  const [countdownState, setCountdownState] = useState(initData)
+} => {
+  const [countdownState, setCountdownState] = useState(initData);
 
   const activate = useCallback(() => {
-    setCountdownState(true)
-  }, [])
+    setCountdownState(true);
+  }, []);
 
   const deactivate = useCallback(() => {
-    setCountdownState(false)
-  }, [])
+    setCountdownState(false);
+  }, []);
 
   useEffect(
     () => {
       if (!countdownState) {
-        return
+        return;
       }
 
       const handler = setTimeout((): void => {
-        deactivate()
-      }, timeout)
+        deactivate();
+      }, timeout);
 
       return (): void => {
-        clearTimeout(handler)
-      }
+        clearTimeout(handler);
+      };
     },
     [countdownState, timeout, deactivate]
-  )
+  );
 
-  return { isCountdownActivate: countdownState, activate, deactivate }
-}
+  return { isCountdownActivate: countdownState, activate, deactivate };
+};

@@ -1,33 +1,33 @@
 .input-search-wrapper {
-  flex: 1;
+	flex: 1;
 }
 
 .input-search {
-  background: {
-    image: url('~assets/search.png');
-    repeat: no-repeat;
-    size: 30px;
-    position: 3% 50%;
-  }
+	background: {
+		image: url('~assets/search.png');
+		repeat: no-repeat;
+		size: 30px;
+		position: 3% 50%;
+	}
 
-  border-top-left-radius: $border-radius;
-  border-bottom-left-radius: $border-radius;
+	border-top-left-radius: $border-radius;
+	border-bottom-left-radius: $border-radius;
 
-  padding-left: 60px;
-  width: 100%;
+	padding-left: 60px;
+	width: 100%;
 
-  &.error {
-    color: $color-error;
-  }
+	&.error {
+		color: $color-error;
+	}
 }
 
 .input-search.loading {
-  background: {
-    image: url('~assets/loading.gif');
-  }
+	background: {
+		image: url('~assets/loading.gif');
+	}
 }
 
 .button-search {
-  border-top-right-radius: $border-radius;
-  border-bottom-right-radius: $border-radius;
+	border-top-right-radius: $border-radius;
+	border-bottom-right-radius: $border-radius;
 }

@@ -1,84 +1,67 @@
 {
-  "name": "frontend",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@types/classnames": "2.2.9",
-    "@types/color": "3.0.0",
-    "@types/graphql": "14.5.0",
-    "@types/jest": "24.0.18",
-    "@types/lodash": "4.14.138",
-    "@types/node": "12.7.5",
-    "@types/react": "16.9.2",
-    "@types/react-dom": "16.9.0",
-    "@types/react-helmet": "5.0.10",
-    "@types/react-router-dom": "4.3.5",
-    "apollo-boost": "0.4.4",
-    "classnames": "2.2.6",
-    "color": "3.1.2",
-    "graphql": "14.4.2",
-    "history": "4.10.1",
-    "lodash": "4.17.15",
-    "react": "16.9.0",
-    "react-apollo-hooks": "0.5.0",
-    "react-app-polyfill": "^1.0.2",
-    "react-dom": "16.9.0",
-    "react-helmet": "5.2.1",
-    "react-router-dom": "5.0.1"
-  },
-  "scripts": {
-    "start": "concurrently \"react-scripts start\" \"yarn apollo:generate --watch\"",
-    "build": "yarn apollo:generate && CI=false yarn react-scripts build",
-    "eject": "react-scripts eject",
-    "precommit": "yarn apollo:generate && yarn lint-staged",
-    "apollo:generate": "apollo codegen:generate --excludes=node_modules/* --includes=src/**/*.tsx --localSchemaFile ../backend/src/main/resources/schema.graphqls --target typescript --tagName gql --outputFlat src/generated",
-    "eslint": "./node_modules/.bin/eslint ./src/**/*.{ts,tsx}"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "2.2.0",
-    "@typescript-eslint/parser": "2.2.0",
-    "apollo": "2.18.0",
-    "concurrently": "4.1.2",
-    "eslint-config-prettier": "6.3.0",
-    "eslint-config-react": "1.1.7",
-    "eslint-plugin-prettier": "3.1.0",
-    "eslint-plugin-react": "7.14.3",
-    "eslint-plugin-react-hooks": "2.0.1",
-    "husky": "3.0.5",
-    "lint-staged": "9.2.5",
-    "node-sass": "4.12.0",
-    "prettier": "1.18.2",
-    "pretty-quick": "1.11.1",
-    "react-scripts": "3.1.1",
-    "typescript": "3.6.3"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn precommit"
-    }
-  },
-  "lint-staged": {
-    "*.{js,jsx,tx,tsx,json,md,scss,css}": [
-      "pretty-quick --staged"
-    ],
-    "*.{js,jsx,tx,tsx}": [
-      "eslint"
-    ]
-  },
-  "proxy": "http://localhost:8080"
+	"name": "frontend",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"start": "react-scripts start",
+		"build": "yarn apollo:codegen && CI=false yarn react-scripts build",
+		"eject": "react-scripts eject",
+		"be:start": "sh ./be_start.sh",
+		"apollo:codegen": "apollo client:codegen --target=typescript --tagName=gql --outputFlat=src/generated --localSchemaFile=../backend/src/main/resources/graphql/query.graphqls,../backend/src/main/resources/graphql/types/category.graphqls,../backend/src/main/resources/graphql/types/source.graphqls"
+	},
+	"dependencies": {
+		"@types/color": "3.0.1",
+		"@types/jest": "26.0.23",
+		"@types/lodash": "4.14.169",
+		"@types/node": "15.0.3",
+		"@types/react": "17.0.5",
+		"@types/react-dom": "17.0.5",
+		"@types/react-helmet": "6.1.1",
+		"@types/react-router-dom": "^5.1.7",
+		"apollo-boost": "0.4.9",
+		"classnames": "2.3.1",
+		"graphql": "15.5.0",
+		"history": "5.0.0",
+		"lodash": "4.17.21",
+		"react": "17.0.2",
+		"react-apollo-hooks": "0.5.0",
+		"react-app-polyfill": "^2.0.0",
+		"react-dom": "17.0.2",
+		"react-flagkit": "^2.0.4",
+		"react-helmet": "6.1.0",
+		"react-icons": "^4.2.0",
+		"react-router": "^5.2.0",
+		"react-router-dom": "^5.2.0",
+		"showdown": "^1.9.1"
+	},
+	"devDependencies": {
+		"@types/react-icons": "^3.0.0",
+		"@types/showdown": "^1.9.3",
+		"@typescript-eslint/eslint-plugin": "^4.15.1",
+		"@typescript-eslint/parser": "^4.15.1",
+		"apollo": "2.33.2",
+		"eslint": "^7.20.0",
+		"eslint-plugin-import": "^2.23.0",
+		"eslint-plugin-jsx-a11y": "^6.4.1",
+		"eslint-plugin-prefer-arrow": "^1.2.3",
+		"eslint-plugin-react": "^7.22.0",
+		"http-proxy-middleware": "^2.0.0",
+		"node-sass": "5.0.0",
+		"prettier": "2.3.0",
+		"pretty-quick": "3.1.0",
+		"react-scripts": "4.0.3",
+		"typescript": "4.2.4"
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	}
 }

@@ -1,5 +1,5 @@
-import React, { FC } from 'react'
-import classNames from 'classnames'
+import { FC } from 'react';
+import classNames from 'classnames';
 
 export const Content: FC<{ className?: string; fluid?: boolean }> = ({
   children,
@@ -14,4 +14,4 @@ export const Content: FC<{ className?: string; fluid?: boolean }> = ({
   >
     {children}
   </div>
-)
+);

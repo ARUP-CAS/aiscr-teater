@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: arub-api
+  labels:
+    name: arub-api
+    app: arub-api
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: arub-api
+  template:
+    metadata:
+      labels:
+        name: arub-api
+        app: arub-api
+    spec:
+      containers:
+        - name: api
+          image: eu.gcr.io/inqool-1301/cz.inqool.arub/backend:latest
+          env:
+            - name: DB_ADDRESS
+              value: "db.inqool.cz"
+            - name: DB_PORT
+              value: "5496"
+            - name: DB_USER
+              value: "arub"
+            - name: DB_PASSWORD
+              value: "yublenAromVer2"
+            - name: DB_NAME
+              value: "arub"
+            - name: ELASTIC_ADDRESS
+              value: "arub-elastic"
+            - name: ELASTIC_PORT
+              value: "9200"
+          resources:
+            requests:
+              cpu: "20m"
+              memory: "32Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+          ports:
+            - name: api
+              containerPort: 8080
+              protocol: TCP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: arub-api
+  labels:
+    name: arub-api
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+      name: api
+  selector:
+    name: arub-api
+  clusterIP:

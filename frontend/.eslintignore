@@ -1,0 +1,6 @@
+src/serviceWorker.ts
+src/scss/*
+node_modules/*
+public/*
+build/*
+graphql.config.js

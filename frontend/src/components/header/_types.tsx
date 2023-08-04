@@ -1,6 +1,6 @@
-export interface HeaderProps {
-  className?: string
-  title?: string
-  sliderImages?: string[]
-  hideDefaultBackgroundImage?: boolean
-}
+export type HeaderProps = {
+	className?: string;
+	title?: string;
+	sliderImages?: string[];
+	hideDefaultBackgroundImage?: boolean;
+};

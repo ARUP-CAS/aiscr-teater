@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: arub-elastic
+  labels:
+    name: arub-elastic
+    app: arub-elastic
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: arub-elastic
+  template:
+    metadata:
+      labels:
+        name: arub-elastic
+        app: arub-elastic
+    spec:
+      containers:
+        - name: elastic
+          image: elasticsearch:6.8.2
+          env:
+            - name: discovery.type
+              value: single-node
+            - name: ES_JAVA_OPTS
+              value: "-Xms512m -Xmx1g"
+          resources:
+            requests:
+              cpu: "20m"
+              memory: "512Mi"
+            limits:
+              cpu: "500m"
+              memory: "1024Mi"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: arub-elastic
+  labels:
+    name: arub-elastic
+spec:
+  type: ClusterIP
+  ports:
+    - port: 9200
+      targetPort: 9200
+      protocol: TCP
+      name: elastic
+  selector:
+    name: arub-elastic
+  clusterIP:

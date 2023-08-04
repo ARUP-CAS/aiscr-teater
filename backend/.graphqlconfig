@@ -1,0 +1,15 @@
+{
+  "name": "Thesaurus GraphQL Schema",
+  "schemaPath": "./graphql/query.graphqls",
+  "extensions": {
+    "endpoints": {
+      "Default GraphQL Endpoint": {
+        "url": "http://localhost:8080/api/graphql",
+        "headers": {
+          "user-agent": "JS GraphQL"
+        },
+        "introspect": false
+      }
+    }
+  }
+}

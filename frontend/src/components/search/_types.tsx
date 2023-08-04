@@ -1,12 +1,12 @@
-import { FocusEventHandler, FormEventHandler, InputHTMLAttributes } from 'react'
+import { FocusEventHandler, FormEventHandler, InputHTMLAttributes } from 'react';
 
 // eslint-disable-next-line @typescript-eslint/camelcase
-import { GetSearchResults_search } from 'generated/GetSearchResults'
+import { GetSearchResults_search } from 'generated/GetSearchResults';
 
 // eslint-disable-next-line @typescript-eslint/camelcase
 export type FormResult = GetSearchResults_search
 
-export interface SearchFormsAttributes {
+export type SearchFormsAttributes = {
   data?: FormResult[]
   loading?: boolean
   error?: boolean

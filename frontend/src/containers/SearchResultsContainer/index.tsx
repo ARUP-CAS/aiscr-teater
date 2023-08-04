@@ -1,1 +1,1 @@
-export { SearchResultsContainer } from './SearchResultsContainer'
+export { SearchResultsContainer } from './SearchResultsContainer';

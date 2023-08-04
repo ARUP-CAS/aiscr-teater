@@ -1,0 +1,16 @@
+scalar DateTime
+scalar Url
+
+type Query {
+    singleCategoryWithId(id: ID!, language:Language!): Category!
+    singleCategoryWithUrl(url: String!, language:Language!): Category!
+
+    categoryBreadcrumbsWithId(id: ID!, language:Language): [Category!]!
+    categoryBreadcrumbsWithUrl(url: String!, language:Language): [Category!]!
+
+    listSources: [Source!]!
+    listRootCategories(language:Language): [Category!]!
+    search(value: String!, limit: Int, language:Language): [SearchItem!]!
+    lastImport: DateTime
+    exportAll: Url
+}

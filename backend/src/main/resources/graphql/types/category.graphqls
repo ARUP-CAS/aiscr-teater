@@ -1,0 +1,55 @@
+type Category {
+    id: ID!
+    name: String!
+    dateFrom: String
+    dateTo: String
+    dateAccurate: String
+    url: String!
+    leaf: Boolean!
+    descriptions: [Description!]
+    children: [Category!]
+    neighbors: [Category!]
+    parentsNeighbors: [Category!]
+    exportLink: Url
+}
+
+type Description {
+    id: ID!
+    category: Category!
+    title: String!
+    contents: [Content!]
+}
+
+type Content {
+    id: ID!
+    description: Description!
+    text: String
+    quotes: [Quote!]
+}
+
+type Quote {
+    id: ID!
+    title: String
+    date: String
+    locationPage: String
+    locationUrl: String
+    content: Content!
+    source: Source
+}
+
+type SearchItem {
+    id: ID!
+    name: String!
+    url: String!
+    searchType: SearchType!
+}
+enum SearchType {
+    NAME
+    METADATA
+}
+
+enum Language {
+    CS
+    EN
+    DE
+}

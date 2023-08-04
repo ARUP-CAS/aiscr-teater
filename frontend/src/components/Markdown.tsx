@@ -1,25 +1,23 @@
-import React, { forwardRef, ReactNode } from 'react'
-import 'scss/_markdown.scss'
+import { useMemo } from 'react';
+import showdown from 'showdown';
 
-// eslint-disable-next-line react/display-name
-const Markdown = forwardRef<
-  HTMLDivElement,
-  {
-    children?: ReactNode
-    dangerouslySetInnerHTML?: {
-      __html: string
-    }
-  }
->(({ children, dangerouslySetInnerHTML }, ref) => {
-  return (
-    <div
-      className="markdown"
-      ref={ref}
-      dangerouslySetInnerHTML={dangerouslySetInnerHTML}
-    >
-      {children}
-    </div>
-  )
-})
+const converter = new showdown.Converter({
+	openLinksInNewWindow: true,
+});
 
-export { Markdown }
+type Props = {
+	text: string;
+	inline?: boolean;
+};
+
+const Markdown = ({ text, inline }: Props) => {
+	const md = useMemo(() => converter.makeHtml(text), [text]);
+	return md ? (
+		<span
+			dangerouslySetInnerHTML={{ __html: md }}
+			className={inline ? 'markdown-inline' : undefined}
+		/>
+	) : null;
+};
+
+export default Markdown;

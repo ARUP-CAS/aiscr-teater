@@ -1,2 +1,2 @@
-export { Header } from './Header'
-export { HeaderTags } from './HeaderTags'
+export { Header } from './Header';
+export { HeaderTags } from './HeaderTags';

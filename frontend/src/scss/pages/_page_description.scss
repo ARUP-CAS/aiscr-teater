@@ -2,103 +2,130 @@
 @import '~scss/variables'; // variables
 
 .breadcrumbs {
-  display: flex;
-  flex: 0 0 37px;
-  justify-content: space-between;
-  padding: $fluid-page-padding;
-  border-bottom: 1px solid $color-tertiary;
-  font-size: 0.87rem;
+	display: flex;
+	flex: 0 0 37px;
+	justify-content: space-between;
+	padding: $fluid-page-padding;
+	border-bottom: 1px solid $color-tertiary;
+	font-size: 0.87rem;
 
-  .breadcrumbs-list {
-    list-style-type: none;
+	.breadcrumbs-list {
+		list-style-type: none;
 
-    li {
-      display: inline;
-      color: $color-accent;
+		li {
+			display: inline;
+			color: $color-accent;
 
-      &:not(:last-child):after {
-        padding: 0 8px;
-        content: '/\00a0';
-        color: $color-tertiary;
-      }
+			&:not(:last-child):after {
+				padding: 0 8px;
+				content: '/\00a0';
+				color: $color-tertiary;
+			}
 
-      @include mobile {
-        display: block;
-        font-size: 0.8rem;
-        padding-bottom: 5px;
+			@include mobile {
+				display: block;
+				font-size: 0.8rem;
+				padding-bottom: 5px;
 
-        &:after {
-          display: none;
-        }
-      }
-    }
+				&:after {
+					display: none;
+				}
+			}
+		}
 
-    .active {
-      font-weight: bold;
-    }
+		.active {
+			font-weight: bold;
+		}
 
-    a {
-      color: $color-accent;
+		a {
+			color: $color-accent;
 
-      &:hover,
-      &:focus {
-        text-decoration: underline;
-      }
+			&:hover,
+			&:focus {
+				text-decoration: underline;
+			}
 
-      @include link-no-effect;
-    }
-  }
+			@include link-no-effect;
+		}
+	}
 
-  .remove-search {
-    @include link-no-effect;
-    color: #000000;
-    font-weight: bold;
+	.remove-search {
+		@include link-no-effect;
+		color: #000000;
+		font-weight: bold;
 
-    @include mobile {
-      display: none;
-    }
-  }
+		@include mobile {
+			display: none;
+		}
+	}
 }
 
 .description {
-  display: flex;
-  align-items: strecth;
-  height: 100%;
-  flex: 1;
+	display: flex;
+	align-items: strecth;
+	height: 100%;
+	flex: 1;
 
-  @include mobile {
-    flex-direction: column;
-  }
+	@include mobile {
+		flex-direction: column;
+	}
 
-  & > * {
-    padding: $fluid-page-padding;
-  }
+	& > * {
+		padding: $fluid-page-padding;
+	}
 
-  .empty {
-    font-style: italic;
-  }
+	.empty {
+		font-style: italic;
+	}
 
-  .description-content {
-    flex: 4;
+	.description-content {
+		position: relative;
+		flex: 4;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
 
-    // set up for loading
-    & > div {
-      min-height: 25px;
+		// set up for loading
+		& > div {
+			min-height: 25px;
 
-      &:first-child {
-        margin-bottom: 2rem;
-      }
-      &:not(:first-child) {
-        margin-bottom: 0.3rem;
-      }
-    }
-  }
+			&:first-child {
+				margin-bottom: 2rem;
+			}
+			&:not(:first-child) {
+				margin-bottom: 0.3rem;
+			}
+		}
+
+		& .export {
+			position: absolute;
+			top: 0.8rem;
+			right: 1.5rem;
+
+			display: flex;
+			align-items: center;
+			gap: 4px;
+		}
+
+		& .permalink {
+			display: flex;
+			gap: 2px;
+			background: none;
+			padding: 0;
+			margin-top: -18px;
+			margin-bottom: 27px;
+			color: $color-primary;
+			text-transform: none;
+			font-size: 12px;
+			opacity: 0.8;
+		}
+	}
 }
 
 .content-description-page {
-  .oops-wrapper {
-    @include mobile {
-      margin-top: 5rem;
-    }
-  }
+	.oops-wrapper {
+		@include mobile {
+			margin-top: 5rem;
+		}
+	}
 }

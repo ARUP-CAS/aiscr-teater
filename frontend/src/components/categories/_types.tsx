@@ -1,4 +1,4 @@
-export interface Category {
-  name: string
-  url: string
-}
+export type Category = {
+	name: string;
+	url: string;
+};

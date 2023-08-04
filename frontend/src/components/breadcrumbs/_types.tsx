@@ -1,5 +1,5 @@
-export interface Breadcrumb {
-  name: string
-  url: string
-  active?: boolean
-}
+export type Breadcrumb = {
+	name: string;
+	url: string;
+	active?: boolean;
+};

@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: arub
+  labels:
+    app: arub
+    name: arub
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: arub
+  template:
+    metadata:
+      labels:
+        name: arub
+        app: arub
+    spec:
+      containers:
+        - name: web
+          image: eu.gcr.io/inqool-1301/cz.inqool.arub/frontend:latest
+          env:
+            - name: API_URL
+              value: "http://10.3.240.27:8080/api"
+          resources:
+            requests:
+              cpu: "20m"
+              memory: "32Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: arub
+  labels:
+    name: arub
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+      name: http
+  selector:
+    name: arub
+  clusterIP:

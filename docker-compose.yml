@@ -1,0 +1,43 @@
+version: "3"
+
+services:
+  postgres:
+    image: bitnami/postgresql:10.7.0
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_USER: inqool
+      POSTGRES_PASSWORD: test
+      POSTGRES_DB: thesaurus
+  elasticsearch:
+    image: elasticsearch:6.8.2
+    environment:
+      - discovery.type=single-node
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+  backend:
+    environment:
+      - DB_ADDRESS=postgres
+      - DB_PORT=5432
+      - DB_USER=inqool
+      - DB_PASSWORD=test
+      - DB_NAME=thesaurus
+      - ELASTIC_ADDRESS=elasticsearch
+      - ELASTIC_PORT=9200
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+      - elasticsearch
+  frontend:
+    environment:
+      - API_URL=http://backend:8080
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
